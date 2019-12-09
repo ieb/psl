@@ -1,14 +1,30 @@
 
+# Testing Public Suffix List Submissions
+
 This repo has been forked from the npm psl repo to 
-allow testing of rules prior to submission to the Public Suffix List
+allow testing of rules prior to submission to the Public Suffix List. The standard npm psl doesnt support loading a Public Suffix List definition as the current list is built in. This patched fork allows the list to be loaded and the tests to be run against a proposed list.
 
 ## Process for testing.
+
+Fork https://github.com/publicsuffix/list.git, create a branch
+prepare submission
+perform
+   make test
+
+which may need the following to be installed
+
+   sudo apt-get install python3, make, git, autoconf, autopoint, pkg-config, libtool, libicu, libicu-dev
+
+
+There are tests in  https://github.com/publicsuffix/list.git, however I found them not detailed enough to be certain the submission achieved hence this fork.
 
 Add tests in tests, eg psl.parse.adobeaemcloud.spec.js
 
     export PSL_DATA=<path to public suffix list>
     npm run prebuild
     npm test
+
+
 
 
 
