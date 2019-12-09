@@ -187,5 +187,4 @@ describe('psl.parse()', function () {
     Assert.equal(parsed.subdomain, null);
     Assert.equal(parsed.listed, true);
   });
-
 });

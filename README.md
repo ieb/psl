@@ -1,4 +1,20 @@
+
+This repo has been forked from the npm psl repo to 
+allow testing of rules prior to submission to the Public Suffix List
+
+## Process for testing.
+
+Add tests in tests, eg psl.parse.adobeaemcloud.spec.js
+
+    export PSL_DATA=<path to public suffix list>
+    npm run prebuild
+    npm test
+
+
+
+
 # psl (Public Suffix List)
+
 
 [![NPM](https://nodei.co/npm/psl.png?downloads=true&downloadRank=true)](https://nodei.co/npm/psl/)
 

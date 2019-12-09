@@ -23,6 +23,8 @@ internals.rules = require('./data/rules.json').map(function (rule) {
 });
 
 
+
+
 //
 // Check is given string ends with `suffix`.
 //
@@ -30,6 +32,7 @@ internals.endsWith = function (str, suffix) {
 
   return str.indexOf(suffix, str.length - suffix.length) !== -1;
 };
+
 
 
 //
@@ -133,7 +136,6 @@ internals.validate = function (input) {
 //
 // Public API
 //
-
 
 //
 // Parse domain.

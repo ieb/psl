@@ -7,6 +7,7 @@
 // Deps
 //
 const Fs = require('fs');
+const process = require('process');
 const Path = require('path');
 const { Transform } = require('stream');
 const Request = require('request');
@@ -20,6 +21,7 @@ const internals = {};
 // Download URL and path to rules.json file.
 //
 internals.src = 'https://publicsuffix.org/list/effective_tld_names.dat';
+internals.src_local = Path.join(__dirname, '../../publicsuffixlist/public_suffix_list.dat');
 internals.dest = Path.join(__dirname, '../data/rules.json');
 
 
@@ -97,7 +99,16 @@ internals.parse = new Transform({
 //
 // Download rules and create rules.json file.
 //
-Request(internals.src)
-  .pipe(internals.parse)
-  .pipe(JSONStream.stringify('[\n', ',\n', '\n]'))
-  .pipe(Fs.createWriteStream(internals.dest));
+if ( process.env.PSL_DATA ) {
+  console.log('Using Local Rules from ',process.env.PSL_DATA);
+  Fs.createReadStream(process.env.PSL_DATA)
+    .pipe(internals.parse)
+    .pipe(JSONStream.stringify('[\n', ',\n', '\n]'))
+    .pipe(Fs.createWriteStream(internals.dest));
+} else {
+  Request(internals.src)
+    .pipe(internals.parse)
+    .pipe(JSONStream.stringify('[\n', ',\n', '\n]'))
+    .pipe(Fs.createWriteStream(internals.dest));
+
+}
